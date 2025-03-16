@@ -1,0 +1,20 @@
+{
+  "name": "property-scout",
+  "version": "1.0.0",
+  "description": "Property Scout animation for zoning changes",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve",
+    "build": "echo 'No build step required'"
+  },
+  "keywords": [
+    "property",
+    "zoning",
+    "animation"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "serve": "^14.2.1"
+  }
+} 
