@@ -1,6 +1,8 @@
 {
-  "name": "my-v0-project",
+  "name": "earlyshh-website",
   "version": "0.1.0",
+  "description": "Earlyshh Web Platform - Admin and Brand Dashboards",
+  "repository": "https://github.com/MadisonSNYC/EarlyshhWebsite.git",
   "private": true,
   "scripts": {
     "build": "next build",
