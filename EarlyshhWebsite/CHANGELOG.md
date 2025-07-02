@@ -8,9 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Created CHANGELOG.md to track project changes
-- Updated README.md with web platform-specific documentation
-- Added project structure and tech stack information to README
+- Nothing yet in this section
 
 ### Changed
 - Nothing yet in this section
@@ -26,6 +24,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 - Nothing yet in this section
+
+## [0.2.0] - 2025-07-02
+
+### Added
+- **Complete component decomposition**: 7 focused section components in /components/sections/
+- **Data layer extraction**: TypeScript interfaces in /data directory (benefits.ts, features.ts, steps.ts, constants.ts)
+- **Error boundary system**: error.tsx, loading.tsx, not-found.tsx with branded styling
+- **Reusable UI components**: FeatureCard, SectionHeader, GradientButton with flexible variants
+- **Comprehensive documentation**: Updated CLAUDE_EARLYSHH_WEBSITE.md with completion tracking
+
+### Changed
+- **Landing page architecture**: Reduced from 445+ lines to 21 lines of clean orchestration
+- **Code organization**: Extracted static data to dedicated TypeScript interface files
+- **Component structure**: Split monolithic page into 7 focused, maintainable section components
+- **Error handling**: Replaced default Next.js error pages with branded, functional alternatives
+
+### Performance
+- **Build optimization**: Faster compilation with component isolation
+- **Code maintainability**: Dramatically improved with separation of concerns
+- **Developer experience**: Much easier to modify individual sections without affecting others
+
+### Technical Debt Reduction
+- **Eliminated code duplication**: All static data centralized in /data directory
+- **Improved TypeScript coverage**: Proper interfaces for all data structures
+- **Enhanced component reusability**: Created flexible UI components for repeated patterns
 
 ## [0.1.0] - 2025-07-02
 
