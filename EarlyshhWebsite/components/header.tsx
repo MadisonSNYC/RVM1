@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useMemo, useCallback } from "react"
 import { Menu, X, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button" // Assuming shadcn/ui Button
 import { usePathname } from "next/navigation" // To highlight active link
@@ -17,9 +17,25 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen)
-  }
+  // Memoize className computations to prevent re-renders
+  const navItemClasses = useMemo(() => ({
+    desktop: {
+      active: "text-sm font-medium transition-colors hover:text-purple-300 text-purple-400",
+      inactive: "text-sm font-medium transition-colors hover:text-purple-300 text-slate-300"
+    },
+    mobile: {
+      active: "block px-3 py-2 rounded-md text-base font-medium transition-colors hover:bg-slate-800 hover:text-purple-300 bg-slate-800 text-purple-400",
+      inactive: "block px-3 py-2 rounded-md text-base font-medium transition-colors hover:bg-slate-800 hover:text-purple-300 text-slate-300"
+    }
+  }), [])
+
+  const toggleMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(prev => !prev)
+  }, [])
+
+  const closeMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(false)
+  }, [])
 
   return (
     <header className="sticky top-0 z-50 w-full bg-slate-900/80 backdrop-blur-md border-b border-slate-700">
@@ -38,9 +54,7 @@ export default function Header() {
               <Link
                 key={link.label}
                 href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-purple-300 ${
-                  pathname === link.href ? "text-purple-400" : "text-slate-300"
-                }`}
+                className={pathname === link.href ? navItemClasses.desktop.active : navItemClasses.desktop.inactive}
               >
                 {link.label}
               </Link>
@@ -80,10 +94,8 @@ export default function Header() {
               <Link
                 key={link.label}
                 href={link.href}
-                onClick={() => setIsMobileMenuOpen(false)} // Close menu on click
-                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors hover:bg-slate-800 hover:text-purple-300 ${
-                  pathname === link.href ? "bg-slate-800 text-purple-400" : "text-slate-300"
-                }`}
+                onClick={closeMobileMenu} // Close menu on click
+                className={pathname === link.href ? navItemClasses.mobile.active : navItemClasses.mobile.inactive}
               >
                 {link.label}
               </Link>

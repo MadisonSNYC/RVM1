@@ -1,7 +1,6 @@
-import { Mail, MapPin, MessageSquare } from "lucide-react"
+import { Mail, MapPin, MessageSquare, Instagram, Linkedin, Twitter } from "lucide-react"
 import ContactForms from "./contact-forms"
 import Link from "next/link"
-import { FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa"
 
 export default function ContactPage() {
   return (
@@ -41,13 +40,13 @@ export default function ContactPage() {
             </div>
             <div className="flex items-center gap-4">
               <Link href="#" aria-label="Instagram">
-                <FaInstagram className="w-7 h-7 text-slate-400 hover:text-pink-400 transition-colors" />
+                <Instagram className="w-7 h-7 text-slate-400 hover:text-pink-400 transition-colors" />
               </Link>
               <Link href="#" aria-label="LinkedIn">
-                <FaLinkedin className="w-7 h-7 text-slate-400 hover:text-blue-400 transition-colors" />
+                <Linkedin className="w-7 h-7 text-slate-400 hover:text-blue-400 transition-colors" />
               </Link>
               <Link href="#" aria-label="Twitter">
-                <FaTwitter className="w-7 h-7 text-slate-400 hover:text-sky-400 transition-colors" />
+                <Twitter className="w-7 h-7 text-slate-400 hover:text-sky-400 transition-colors" />
               </Link>
             </div>
           </div>
