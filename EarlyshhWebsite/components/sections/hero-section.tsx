@@ -6,7 +6,7 @@ import { gradients, colors } from "@/data/constants"
 
 export default function HeroSection() {
   return (
-    <div className={`bg-gradient-to-br ${gradients.primary}`}>
+    <div className="bg-gradient-to-br from-pink-500 via-purple-600 via-blue-600 to-turquoise-500">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-screen py-20 lg:py-12">
           <div className="text-center lg:text-left space-y-6 md:space-y-8">
@@ -21,7 +21,7 @@ export default function HeroSection() {
               <Button
                 asChild
                 size="lg"
-                className={`w-full max-w-xs mx-auto lg:mx-0 h-14 bg-gradient-to-r ${colors.button.primary} hover:${colors.button.primaryHover} text-slate-900 font-bold text-lg rounded-xl shadow-lg hover:shadow-cyan-500/40 transition-all duration-300 transform hover:scale-105 group`}
+                className="w-full max-w-xs mx-auto lg:mx-0 h-14 bg-gradient-to-r from-teal-400 to-cyan-500 hover:from-teal-500 hover:to-cyan-600 text-slate-900 font-bold text-lg rounded-xl shadow-lg hover:shadow-cyan-500/40 transition-all duration-300 transform hover:scale-105 group"
               >
                 <Link href="/book-demo">
                   <Sparkles className="w-5 h-5 mr-2 transition-transform duration-300 group-hover:animate-pulse" />

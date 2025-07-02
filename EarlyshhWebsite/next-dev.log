@@ -1,0 +1,84 @@
+   ▲ Next.js 15.2.4
+   - Local:        http://localhost:3000
+   - Network:      http://172.16.20.14:3000
+
+ ✓ Starting...
+ ✓ Ready in 1418ms
+ ○ Compiling / ...
+ ✓ Compiled / in 2.2s (880 modules)
+Image with src "/images/superoot-story-background-2.jpg" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Image with src "/images/superoot-story-background-2.jpg" has legacy prop "objectFit". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Image with src "/images/user-avatar-story.jpeg" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Image with src "/images/user-avatar-story.jpeg" has legacy prop "objectFit". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Image with src "/placeholder.svg?width=138&height=288&query=real-time+analytics+dashboard+mockup" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Image with src "/placeholder.svg?width=138&height=288&query=real-time+analytics+dashboard+mockup" has legacy prop "objectFit". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Image with src "/placeholder.svg?width=138&height=288&query=curated+user-generated+content+library+mockup" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Image with src "/placeholder.svg?width=138&height=288&query=curated+user-generated+content+library+mockup" has legacy prop "objectFit". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Image with src "/placeholder.svg?width=138&height=288&query=survey+feedback+dashboard+mockup" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Image with src "/placeholder.svg?width=138&height=288&query=survey+feedback+dashboard+mockup" has legacy prop "objectFit". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Image with src "/placeholder.svg?width=138&height=288&query=crm+dashboard+interface+mockup" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Image with src "/placeholder.svg?width=138&height=288&query=crm+dashboard+interface+mockup" has legacy prop "objectFit". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Image with src "/placeholder.svg?width=138&height=288&query=strategic+services+concept+mockup" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Image with src "/placeholder.svg?width=138&height=288&query=strategic+services+concept+mockup" has legacy prop "objectFit". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Image with src "/placeholder.svg?width=138&height=288&query=calendar+scheduling+interface+mockup" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Image with src "/placeholder.svg?width=138&height=288&query=calendar+scheduling+interface+mockup" has legacy prop "objectFit". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Image with src "/placeholder.svg?width=138&height=288&query=app+user+activation+flow+mockup" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Image with src "/placeholder.svg?width=138&height=288&query=app+user+activation+flow+mockup" has legacy prop "objectFit". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Image with src "/placeholder.svg?width=138&height=288&query=data+insights+dashboard+charts+mockup" has legacy prop "layout". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+Image with src "/placeholder.svg?width=138&height=288&query=data+insights+dashboard+charts+mockup" has legacy prop "objectFit". Did you forget to run the codemod?
+Read more: https://nextjs.org/docs/messages/next-image-upgrade-to-13
+ HEAD / 200 in 2401ms
+ GET / 200 in 245ms
+ ✓ Compiled /_not-found in 261ms (867 modules)
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 354ms
+ ✓ Compiled /how-it-works in 207ms (876 modules)
+ GET /how-it-works 200 in 245ms
+ ✓ Compiled /about in 287ms (887 modules)
+ GET /about 200 in 329ms
+ ○ Compiling /contact ...
+ ✓ Compiled /contact in 795ms (1069 modules)
+ GET /contact 200 in 864ms
+ ✓ Compiled in 254ms (447 modules)
+ ✓ Compiled in 126ms (447 modules)
+ GET /contact 200 in 134ms
+ GET /contact 200 in 15ms
+ ✓ Compiled in 109ms (447 modules)
+ GET /contact 200 in 14ms
+ ✓ Compiled in 82ms (447 modules)
+ GET /contact 200 in 10ms
+ ✓ Compiled in 105ms (447 modules)
+ GET /contact 200 in 116ms
+ ✓ Compiled in 119ms (447 modules)
+ GET /contact 200 in 13ms
+ ✓ Compiled in 114ms (447 modules)
+ GET /contact 200 in 12ms
+ ✓ Compiled in 104ms (447 modules)
+ GET /contact 200 in 16ms
+ ✓ Compiled in 98ms (447 modules)
+ GET /contact 200 in 14ms
+ ✓ Compiled in 156ms (447 modules)
+ ✓ Compiled in 123ms (447 modules)
+ GET /contact 200 in 123ms
+ GET /contact 200 in 13ms
+ ✓ Compiled in 88ms (447 modules)
+ GET /contact 200 in 94ms
+ ✓ Compiled in 97ms (447 modules)

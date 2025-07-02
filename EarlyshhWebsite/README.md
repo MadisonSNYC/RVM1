@@ -20,6 +20,8 @@ Earlyshh Website is a Next.js 15 web platform providing admin and brand dashboar
 - **Reusable UI components**: FeatureCard, SectionHeader, GradientButton with flexible variants
 - **All designs preserved**: Identical visual appearance with dramatically improved maintainability
 
+📖 **See**: [Component Architecture Guide](docs/COMPONENT_ARCHITECTURE.md) for detailed technical documentation
+
 ### 🏗️ Next Phase: Code Quality (Phase 3)
 Ready to begin Phase 3 - improving TypeScript strictness, performance optimization, and code consistency.
 
@@ -80,7 +82,8 @@ earlyshh-website/
 ├── lib/                     # Utility functions
 │   └── utils.ts            # Common utilities
 ├── docs/                    # Documentation
-│   ├── ARCHITECTURE.md      # Architecture documentation
+│   ├── ARCHITECTURE.md      # iOS app architecture (reference)
+│   ├── COMPONENT_ARCHITECTURE.md # Web component architecture ✅
 │   ├── TECHNICAL_ROADMAP.md # Development roadmap
 │   └── Private & Shared/    # Additional docs
 └── public/                  # Static assets
@@ -176,6 +179,17 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 - **date-fns version conflict**: Using --legacy-peer-deps due to react-day-picker requiring older version
 - **Legacy Image props**: Some components use older Next.js Image syntax (warnings only, non-blocking)
 - **Favicon missing**: 404 error for favicon.ico (cosmetic only, doesn't affect functionality)
+
+## 📚 Documentation
+
+### Architecture & Development
+- [Component Architecture Guide](docs/COMPONENT_ARCHITECTURE.md) - Detailed technical documentation of the component system
+- [Development Roadmap](CLAUDE_EARLYSHH_WEBSITE.md) - Master development plan with phase tracking
+- [Changelog](CHANGELOG.md) - Version history and feature tracking
+
+### Reference Documentation
+- [iOS Architecture](docs/ARCHITECTURE.md) - Reference architecture from iOS companion app
+- [Technical Roadmap](docs/TECHNICAL_ROADMAP.md) - Long-term technical planning
 
 ## 📄 License
 
