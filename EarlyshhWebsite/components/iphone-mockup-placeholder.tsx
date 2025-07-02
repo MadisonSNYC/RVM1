@@ -15,9 +15,8 @@ export default function IphoneMockupPlaceholder({ src, alt }: IphoneMockupPlaceh
         <Image
           src={src || "/placeholder.svg"}
           alt={alt}
-          layout="fill"
-          objectFit="cover"
-          className="transform transition-transform duration-300 group-hover:scale-105" // Optional: subtle hover effect
+          fill
+          className="transform transition-transform duration-300 group-hover:scale-105 object-cover" // Optional: subtle hover effect
         />
       </div>
     </div>

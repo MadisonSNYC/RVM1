@@ -301,9 +301,8 @@ export default function AboutPage() {
                 <Image
                   src="/images/madison-founder.jpeg"
                   alt="Madison, Founder of Earlyshh"
-                  layout="fill"
-                  objectFit="cover"
-                  className="" // Removed previous classes like rounded-full, mb-4
+                  fill
+                  className="object-cover" // Removed previous classes like rounded-full, mb-4
                 />
               </div>
               <h3 className="text-2xl font-bold text-slate-100">Madison</h3>
@@ -321,9 +320,8 @@ export default function AboutPage() {
                 <Image
                   src="/images/rob-founder.jpeg"
                   alt="Rob, Co-Founder of Earlyshh"
-                  layout="fill"
-                  objectFit="cover"
-                  className="" // Removed previous classes like rounded-full, mb-4
+                  fill
+                  className="object-cover" // Removed previous classes like rounded-full, mb-4
                 />
               </div>
               <h3 className="text-2xl font-bold text-slate-100">Rob</h3>

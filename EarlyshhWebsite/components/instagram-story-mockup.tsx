@@ -16,8 +16,7 @@ export default function InstagramStoryMockup() {
           <Image
             src="/images/superoot-story-background-2.jpg"
             alt="Person holding a Superoot drink"
-            layout="fill"
-            objectFit="cover"
+            fill
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50"></div>
 
@@ -34,8 +33,7 @@ export default function InstagramStoryMockup() {
                   <Image
                     src="/images/user-avatar-story.jpeg"
                     alt="User avatar - smiling woman"
-                    layout="fill"
-                    objectFit="cover"
+                    fill
                   />
                 </div>
                 <div>
