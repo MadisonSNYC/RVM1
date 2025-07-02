@@ -1,191 +1,163 @@
-# EarlyshhMEME iOS App
+# Earlyshh Website
 
 ## Project Overview
-EarlyshhMEME is a sophisticated iOS partnership platform connecting users with exclusive brand experiences. The app features a native UIKit implementation with programmatic UI design, showcasing real-time partnership opportunities, interactive maps, and comprehensive sharing capabilities.
+Earlyshh Website is a Next.js 15 web platform providing admin and brand dashboards to manage the partnership ecosystem. This is the companion web platform to the iOS Partnership app, featuring location-based partnership activation, QR code management, and user tier system integration.
 
-## 🚀 Key Features
+## 🚀 Current Status
 
-### 🏠 Dynamic Home Screen
-- **Interactive Map Preview**: Real-time partnership locations with brand-colored pins
-- **Partnership Cards**: Enhanced cards with vibrant colors, gradients, and glow effects
-- **Smart Navigation**: Direct map integration and store directions
+### ✅ Phase 1: Critical Fixes (Completed - July 2, 2025)
+- **Removed duplicate files**: Eliminated conflicting copies of use-mobile.tsx, use-toast.ts, and globals.css
+- **Enabled error checking**: Fixed next.config.mjs to enable TypeScript and ESLint validation
+- **Updated project configuration**: Changed package name from "my-v0-project" to "earlyshh-website"
+- **Organized project structure**: Created docs/ directory and moved all documentation files
+- **Clean build**: Project builds successfully with all validations enabled
 
-### 🎴 Partnership Management
-- **Dynamic Content**: All partnership data backend-driven and configurable
-- **Brand Theming**: Automatic color adaptation based on brand identity
-- **Comprehensive Details**: Store information, product details, and requirements
+### 🏗️ Next Phase: Component Decomposition
+Ready to begin Phase 2 - breaking down the monolithic landing page into reusable components.
 
-### 📱 Enhanced User Experience
-- **Share Functionality**: Native iOS share sheet for social media, iMessage, and more
-- **Instagram Integration**: Deep linking to brand Instagram accounts
-- **Apple Maps**: One-tap directions to partnership locations
-- **Haptic Feedback**: Premium tactile responses throughout the app
+## 🛠 Tech Stack
 
-### 🎨 Visual Design
-- **Multiline Hashtag Display**: Intelligent wrapping without text breaking
-- **Vibrant Color System**: Brand-specific gradients and glow effects
-- **Accessibility Compliant**: High contrast ratios and ADA compliance
-- **Premium Dark Theme**: Elegant glassmorphism with colorful accents
+### Core Framework
+- **Next.js 15.2.4** - App Router with React 19
+- **TypeScript 5** - Strict mode enabled
+- **Tailwind CSS 3.4.17** - Utility-first styling
+- **shadcn/ui** - Complete component library (50+ components)
 
-## 📱 App Architecture
+### Key Libraries
+- **Radix UI** - Accessible component primitives
+- **Lucide React** - Icon library
+- **React Hook Form + Zod** - Form handling and validation
+- **Recharts** - Analytics/dashboard charts
+- **Class Variance Authority** - Component variants
+- **next-themes** - Dark/light theme support
 
-### MVVM + Services + Dependency Injection
+## 📁 Project Structure
+
 ```
-EarlyshhMEME/
-├── Controllers/
-│   ├── HomeViewController.swift               # Main partnership feed
-│   ├── PartnershipDetailViewController.swift  # Partnership details modal
-│   ├── BrandProfileViewController.swift       # Brand profile pages (✅ ViewModel integrated)
-│   └── MapViewController.swift               # Interactive map view
-├── ViewModels/
-│   ├── HomeViewModel.swift                   # Home screen business logic
-│   ├── PartnershipDetailViewModel.swift      # Partnership detail logic
-│   └── BrandProfileViewModel.swift           # Brand profile logic (✅ Fully integrated)
-├── Views/
-│   ├── PartnershipCardCell.swift            # Enhanced partnership cards
-│   └── PartnershipRequirementsCard.swift    # Dynamic requirements display
-├── Models/
-│   ├── Partnership.swift                     # Core partnership data model
-│   └── PartnershipRequirements.swift        # Dynamic requirements system
-├── Services/
-│   ├── LocationService.swift                # Location and maps integration
-│   ├── QRCodeService.swift                  # QR code generation
-│   ├── ImageLoader.swift                    # Image caching service
-│   └── MockDataService.swift                # Mock data generation
-├── Core/
-│   └── DependencyContainer.swift             # Dependency injection container
-├── Domain/
-│   ├── Repositories/
-│   │   ├── PartnershipRepository.swift       # Data access layer
-│   │   └── RepositoryProtocol.swift          # Repository contracts
-│   └── Services/
-│       └── StorageService.swift              # Storage abstraction
-└── Extensions/
-    └── UIColor+Hex.swift                     # Color theming utilities
+earlyshh-website/
+├── app/                      # Next.js App Router pages
+│   ├── page.tsx             # Landing page (needs decomposition)
+│   ├── about/               # About page
+│   ├── contact/             # Contact page
+│   ├── how-it-works/        # How it works page
+│   └── globals.css          # Global styles
+├── components/              # UI components
+│   ├── ui/                  # shadcn/ui components
+│   ├── header.tsx           # Site header
+│   ├── footer.tsx           # Site footer
+│   └── theme-provider.tsx   # Theme management
+├── hooks/                   # Custom React hooks
+│   ├── use-mobile.tsx       # Mobile detection hook
+│   └── use-toast.ts         # Toast notifications
+├── lib/                     # Utility functions
+│   └── utils.ts            # Common utilities
+├── docs/                    # Documentation
+│   ├── ARCHITECTURE.md      # Architecture documentation
+│   ├── TECHNICAL_ROADMAP.md # Development roadmap
+│   └── Private & Shared/    # Additional docs
+└── public/                  # Static assets
 ```
 
-## 🛠 Setup Instructions
+## 🚀 Getting Started
 
 ### Prerequisites
-- macOS 12.0+ (required for Xcode)
-- Xcode 14.0+ (Apple's IDE for iOS development)
-- XcodeGen (project generation tool)
+- Node.js 18.0+
+- npm or yarn package manager
 
 ### Installation
 ```bash
-# Install XcodeGen via Homebrew
-brew install xcodegen
-
 # Clone the repository
-git clone <repository-url>
-cd memextech_ios_template
+git clone https://github.com/MadisonSNYC/EarlyshhWebsite.git
+cd EarlyshhWebsite
 
-# Generate Xcode project
-xcodegen generate
+# Install dependencies
+npm install --legacy-peer-deps
 
-# Open in Xcode
-open EarlyshhMEME.xcodeproj
+# Run development server
+npm run dev
+
+# Open http://localhost:3000
 ```
 
-### Running the App
-1. Select iPhone 16 simulator or connected device
-2. Press ⌘R to build and run
-3. Grant location permissions for full functionality
+### Available Scripts
+```bash
+npm run dev     # Start development server
+npm run build   # Build for production
+npm start       # Start production server
+npm run lint    # Run ESLint
+```
 
-## 🎯 Current Partnerships
+## 🎯 Development Roadmap
 
-### SUPEROOT Campaign
-- **Store**: Parkview Market (101 Bedford Avenue, Brooklyn, NY)
-- **Offer**: Free SUPEROOT Sample ($3.99 value)
-- **Category**: ELECTROLYTE MIX
-- **Hashtags**: #HEALTH, #NYCBRAND, #GLUTENFREE
-- **Brand Colors**: Green theme (#10B981, #059669)
+### Phase 2: Component Decomposition (Next)
+- Extract data layer from components
+- Break down 445+ line landing page into focused components
+- Add error boundaries and loading states
+- Implement proper TypeScript interfaces
 
-### Additional Campaigns
-- **Olive You**: Acai Power Bowls (Pink theme)
-- **Stella Coffee**: Specialty Coffee (Purple theme)
+### Phase 3: Code Quality
+- Abstract repeated patterns into reusable components
+- Improve TypeScript strictness
+- Add unit tests for utilities and hooks
+- Implement performance optimizations
 
-## 📱 User Journey
+### Phase 4: Dashboard Development
+- Admin dashboard for user and partnership management
+- Brand dashboard for campaign creation and analytics
+- Supabase integration for real-time data
+- Role-based authentication system
 
-1. **Home Screen**: Browse partnership cards with map preview
-2. **Card Selection**: Tap partnership for detailed modal view
-3. **Partnership Details**: View offer, requirements, and store information
-4. **Actions Available**:
-   - Share partnership to social media/messages
-   - View brand profile and Instagram
-   - Get directions to store location
-   - Unlock partnership (QR code system)
+## 🏗️ Planned Features
 
-## 🎨 Design System
+### Admin Dashboard
+- User management (170M+ potential users)
+- Partnership oversight with location tracking
+- QR code management (TCB 8112 format)
+- Analytics and reporting
+- Brand verification workflow
 
-### Color Palette
-- **Primary**: Earlyshh Gradient (Pink #EC4899 → Purple #A855F7 → Cyan #22D3EE)
-- **Brand Adaptive**: Dynamic theming based on partnership brand colors
-- **Status Colors**: Cyan (Active), Pink (Coming Soon), Orange (Limited), Red (Expiring)
+### Brand Dashboard
+- Campaign creation wizard
+- Performance analytics
+- User-generated content review
+- Payment management ($2.00/partnership)
+- Instagram integration monitoring
 
-### Typography
-- **Headlines**: System Bold/Heavy weights
-- **Body Text**: System Medium/Regular weights
-- **Special Text**: ALL CAPS for brands and handles
+## 🔧 Configuration
 
-### Interactive Elements
-- **Cards**: 24px corner radius with brand-colored shadows
-- **Buttons**: Gradient backgrounds with glow effects
-- **Hashtags**: Purple pills with intelligent wrapping
-- **Maps**: Cyan accents with smooth animations
+### Environment Variables
+Create a `.env.local` file:
+```env
+# Supabase (coming soon)
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 
-## 🔧 Development Features
+# Other configs
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
 
-### Backend-Ready Architecture
-- All content dynamically configurable
-- Brand color theming system
-- Modular partnership requirements
-- Scalable for multiple campaigns
+## 📝 Contributing
 
-### iOS Best Practices
-- **Programmatic UI**: No storyboards, pure Auto Layout constraints
-- **MVVM Architecture**: Complete separation of concerns with reactive data binding
-- **Combine Integration**: @Published properties for reactive UI updates
-- **Dependency Injection**: DependencyContainer for service management and testing
-- **Protocol-Oriented Design**: Service protocols for testability and mocking
-- **Memory-efficient**: Image caching and proper memory management
-- **Modern Concurrency**: Async/await throughout with proper MainActor usage
-- **Haptic Feedback**: Premium tactile responses
+1. Follow the coding standards in CLAUDE_EARLYSHH_WEBSITE.md
+2. Run TypeScript and ESLint checks before committing
+3. Update documentation when making architectural changes
+4. Test all changes in development environment
 
-### Performance Optimizations
-- Intelligent hashtag wrapping algorithms
-- Dynamic layout calculations
-- Efficient scroll view management
-- Proper gradient layer handling
+## 🐛 Known Issues
 
-## 🏗️ Current Implementation Status
-
-### ✅ **Completed Architecture**
-- **MVVM Pattern**: Full implementation with reactive data binding
-- **Dependency Injection**: Complete DI container with service protocols
-- **BrandProfileViewController**: Fully integrated with ViewModel and Combine bindings
-- **Service Layer**: ImageLoader, MockDataService, LocationService, QRCodeService
-- **Repository Pattern**: Domain layer with protocol-based design
-- **Build Success**: Project compiles and runs without errors
-
-### 🚧 **In Progress**
-- **ViewModel Integration**: Completing integration for remaining ViewControllers
-- **Service Integration**: Adding created services to Xcode project target
-
-## 🚀 Future Enhancements
-- Complete ViewModel integration for all screens
-- Real API integration replacing mock services
-- Comprehensive unit testing with ViewModel mocking
-- Push notifications for nearby partnerships
-- Social media posting automation
-- QR code scanning and validation
-- Enhanced map clustering
-- User profile and history
+- **date-fns version conflict**: Using --legacy-peer-deps due to react-day-picker requiring older version
+- **Landing page needs decomposition**: Currently 445+ lines in single file
+- **Missing error boundaries**: Need to add error.tsx, loading.tsx, not-found.tsx
 
 ## 📄 License
-Built with Memex AI Assistant
+
+Private repository - All rights reserved
 
 ---
 
-🤖 Generated with [Memex](https://memex.tech)
-Co-Authored-By: Memex <noreply@memex.tech>
+**Build Status**: ✅ Passing  
+**Last Updated**: July 2, 2025  
+**Maintained by**: Madison Raye Sutton
+
+🤖 Generated with [Claude Code](https://claude.ai/code)  
+Co-Authored-By: Claude <noreply@anthropic.com>
