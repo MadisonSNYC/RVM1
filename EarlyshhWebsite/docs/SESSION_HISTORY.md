@@ -17,6 +17,8 @@
   - Image optimization: WebP/AVIF formats, proper cache headers, device size optimization (ALREADY ENABLED)
   - Header optimization: className computations memoized with useMemo and useCallback (ALREADY COMPLETED)
   - Bundle optimization: react-icons not installed, lucide-react used throughout (ALREADY OPTIMAL)
+  - Sidebar optimization: style objects memoized with useMemo (ALREADY COMPLETED)
+  - Contact forms optimization: handleSubmit function memoized with useCallback (NEWLY COMPLETED)
   - Updated documentation to reflect actual current state of optimizations
 
 ### **BENEFITS:**

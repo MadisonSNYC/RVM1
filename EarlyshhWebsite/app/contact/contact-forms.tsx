@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import { useCallback } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -12,12 +13,13 @@ import { Textarea } from "@/components/ui/textarea"
 import { Calendar, Newspaper, UserPlus, HelpCircle } from "lucide-react"
 
 export default function ContactForms() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  // Memoize handleSubmit to prevent form re-renders
+  const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     // In a real app, you'd handle form submission here.
     // For now, we just show an alert.
     alert("Thanks! We'll be in touch soon.")
-  }
+  }, [])
 
   return (
     <Tabs defaultValue="strategy-call" className="w-full max-w-4xl mx-auto">
