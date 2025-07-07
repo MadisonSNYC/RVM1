@@ -11,11 +11,10 @@
   - Status: Properly configured with WebP/AVIF support, cache headers, device sizes
   - Impact: 60-70% faster image loading (already active)
   
-- [ ] **🚨 P1: Fix Header className computations** 
-  - File: `components/header.tsx` (lines 41-43, 84-86)
-  - Fix: Replace inline template literals with useMemo
-  - Impact: Eliminate header re-renders
-  - Time: 20 minutes
+- [x] **🚨 P1: Fix Header className computations** ✅ **ALREADY COMPLETED**
+  - File: `components/header.tsx` 
+  - Status: Properly memoized with useMemo (lines 22-31) and useCallback (lines 33-39)
+  - Impact: Header re-renders eliminated (already active)
   
 - [ ] **🚨 P1: Optimize Sidebar Provider style objects** 
   - File: `components/sidebar/sidebar-provider.tsx` (lines 96-101)
