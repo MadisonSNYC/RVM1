@@ -12,6 +12,8 @@ export default function ResearchInsightsSection() {
             alt="Market Research Insights Graphic"
             width={600}
             height={300}
+            loading="lazy"
+            sizes="(max-width: 768px) 100vw, 600px"
             className="rounded-lg shadow-xl object-cover"
           />
         </div>

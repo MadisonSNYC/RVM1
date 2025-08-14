@@ -1,27 +1,29 @@
 import { motion } from 'framer-motion'
 import { ArrowLeft, Filter } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
 import { getAllProjects } from '../data/projects'
 import ProjectGrid from '../components/ProjectGrid'
 import ErrorBoundary from '../components/ErrorBoundary'
+import { checkURLSecurity } from '../utils/security'
+import logger from '../services/logger'
+import { useProjectFilters } from '../hooks/useProjectFilters'
 
 export default function WorkPage() {
-  const [selectedCategory, setSelectedCategory] = useState('All')
-  const [selectedIndustry, setSelectedIndustry] = useState('All')
-  
   const allProjects = getAllProjects()
   
-  // Get unique categories and industries
-  const categories = ['All', ...new Set(allProjects.map(p => p.category))]
-  const industries = ['All', ...new Set(allProjects.map(p => p.industry))]
-  
-  // Filter projects based on selections
-  const filteredProjects = allProjects.filter(project => {
-    const categoryMatch = selectedCategory === 'All' || project.category === selectedCategory
-    const industryMatch = selectedIndustry === 'All' || project.industry === selectedIndustry
-    return categoryMatch && industryMatch
-  })
+  // Use the shared filter hook
+  const {
+    selectedCategory,
+    selectedIndustry,
+    categories,
+    industries,
+    filteredProjects,
+    handleCategoryChange,
+    handleIndustryChange,
+    filterError,
+    resultCount,
+    totalCount
+  } = useProjectFilters(allProjects)
 
   return (
     <ErrorBoundary fallbackMessage="Failed to load the work page. Please refresh.">
@@ -70,7 +72,7 @@ export default function WorkPage() {
                 {categories.map(category => (
                   <button
                     key={category}
-                    onClick={() => setSelectedCategory(category)}
+                    onClick={() => handleCategoryChange(category)}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                       selectedCategory === category
                         ? 'bg-[#00D4FF] text-black'
@@ -90,7 +92,7 @@ export default function WorkPage() {
                 {industries.map(industry => (
                   <button
                     key={industry}
-                    onClick={() => setSelectedIndustry(industry)}
+                    onClick={() => handleIndustryChange(industry)}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                       selectedIndustry === industry
                         ? 'bg-[#8B5CF6] text-white'
@@ -105,8 +107,14 @@ export default function WorkPage() {
 
             {/* Results Count */}
             <div className="body-sans text-white/40 text-sm">
-              Showing {filteredProjects.length} of {allProjects.length} projects
+              Showing {resultCount} of {totalCount} projects
             </div>
+            
+            {filterError && (
+              <div className="text-red-500 text-sm mt-2">
+                {filterError}
+              </div>
+            )}
           </motion.div>
 
           {/* Projects Grid */}
@@ -114,8 +122,25 @@ export default function WorkPage() {
             projects={filteredProjects}
             layout="grid"
             onProjectClick={(project) => {
-              // Handle project click - could open modal or navigate to project page
-              console.log('Project clicked:', project)
+              // Validate and navigate to project's external link if available
+              if (project.href) {
+                const urlCheck = checkURLSecurity(project.href)
+                
+                if (urlCheck.safe) {
+                  window.open(project.href, '_blank', 'noopener,noreferrer')
+                  logger.info('Project link opened', { 
+                    projectId: project.id,
+                    projectTitle: project.title 
+                  })
+                } else {
+                  logger.warn('Unsafe project URL blocked', {
+                    projectId: project.id,
+                    reason: urlCheck.reason
+                  })
+                  // Optionally show user-friendly error message
+                  console.error('Unable to open project link')
+                }
+              }
             }}
           />
 

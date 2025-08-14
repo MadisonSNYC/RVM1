@@ -13,8 +13,8 @@ import DirectoryStats from './directory/DirectoryStats'
 
 const categories = ['All', 'Launch Film', 'Social Content', 'Event Visuals', 'Brand Identity', 'Concert Visuals']
 
-export default function ProjectDirectory() {
-  const [isOpen, setIsOpen] = useState(false)
+export default function ProjectDirectory({ onClose, autoOpen = false }) {
+  const [isOpen, setIsOpen] = useState(autoOpen)
   const [selectedCategory, setSelectedCategory] = useState('All')
   const projects = getAllProjects()
 
@@ -22,11 +22,16 @@ export default function ProjectDirectory() {
     ? projects 
     : projects.filter(p => p.category === selectedCategory)
 
+  const handleClose = () => {
+    setIsOpen(false)
+    if (onClose) onClose()
+  }
+
   return (
     <>
       {/* Toggle Button */}
       <motion.button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => isOpen ? handleClose() : setIsOpen(true)}
         className="fixed top-1/2 left-4 z-50 glass-dark backdrop-blur-md rounded-full p-3 hover:scale-110 transition-all duration-300 border border-white/10"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
@@ -50,7 +55,7 @@ export default function ProjectDirectory() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
-              onClick={() => setIsOpen(false)}
+              onClick={handleClose}
               aria-hidden="true"
             />
 

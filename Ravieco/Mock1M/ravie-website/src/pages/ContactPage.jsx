@@ -4,6 +4,8 @@ import { ArrowLeft, Mail, MapPin, Phone, Send, MessageSquare } from 'lucide-reac
 import { useState } from 'react'
 import { companyInfo, offices, socialLinks } from '../data/company-info'
 import ErrorBoundary from '../components/ErrorBoundary'
+import { validateEmail, validateText } from '../utils/validation'
+import logger from '../services/logger'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -14,21 +16,114 @@ export default function ContactPage() {
     budget: '',
     message: ''
   })
+  
+  const [errors, setErrors] = useState({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleChange = (e) => {
+    const { name, value } = e.target
+    
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: null }))
+    }
+    
     setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [name]: value
     }))
   }
 
-  const handleSubmit = (e) => {
+  const validateForm = () => {
+    const newErrors = {}
+    
+    // Validate name
+    const nameValidation = validateText(formData.name, {
+      minLength: 2,
+      maxLength: 100,
+      fieldName: 'Name'
+    })
+    if (!nameValidation.isValid) {
+      newErrors.name = nameValidation.error
+    }
+    
+    // Validate email
+    const emailValidation = validateEmail(formData.email)
+    if (!emailValidation.isValid) {
+      newErrors.email = emailValidation.error
+    }
+    
+    // Validate company (optional)
+    if (formData.company) {
+      const companyValidation = validateText(formData.company, {
+        minLength: 0,
+        maxLength: 100,
+        required: false,
+        fieldName: 'Company'
+      })
+      if (!companyValidation.isValid) {
+        newErrors.company = companyValidation.error
+      }
+    }
+    
+    // Validate message
+    const messageValidation = validateText(formData.message, {
+      minLength: 10,
+      maxLength: 1000,
+      fieldName: 'Message'
+    })
+    if (!messageValidation.isValid) {
+      newErrors.message = messageValidation.error
+    }
+    
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+  
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Handle form submission
-    const mailtoLink = `mailto:${companyInfo.email}?subject=Project Inquiry from ${formData.name}&body=${encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}\nProject Type: ${formData.projectType}\nBudget: ${formData.budget}\n\nMessage:\n${formData.message}`
-    )}`
-    window.location.href = mailtoLink
+    
+    // Prevent double submission
+    if (isSubmitting) return
+    
+    // Validate form
+    if (!validateForm()) {
+      logger.info('Contact form validation failed', { errors })
+      return
+    }
+    
+    setIsSubmitting(true)
+    
+    try {
+      // Sanitize data before submission
+      const sanitizedData = {
+        name: validateText(formData.name, { maxLength: 100 }).sanitized,
+        email: validateEmail(formData.email).sanitized,
+        company: formData.company ? validateText(formData.company, { maxLength: 100, required: false }).sanitized : '',
+        projectType: validateText(formData.projectType || 'Not specified', { maxLength: 50, required: false }).sanitized,
+        budget: validateText(formData.budget || 'Not specified', { maxLength: 50, required: false }).sanitized,
+        message: validateText(formData.message, { maxLength: 1000 }).sanitized
+      }
+      
+      // Log form submission (without email for privacy)
+      logger.info('Contact form submitted', {
+        name: sanitizedData.name,
+        company: sanitizedData.company,
+        projectType: sanitizedData.projectType
+      })
+      
+      // Create mailto link with sanitized data
+      const mailtoLink = `mailto:${companyInfo.email}?subject=Project Inquiry from ${sanitizedData.name}&body=${encodeURIComponent(
+        `Name: ${sanitizedData.name}\nEmail: ${sanitizedData.email}\nCompany: ${sanitizedData.company}\nProject Type: ${sanitizedData.projectType}\nBudget: ${sanitizedData.budget}\n\nMessage:\n${sanitizedData.message}`
+      )}`
+      
+      window.location.href = mailtoLink
+    } catch (error) {
+      logger.error('Contact form submission error', { error: error.message })
+      setErrors({ submit: 'Failed to submit form. Please try again.' })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (

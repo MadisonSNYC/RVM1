@@ -1,12 +1,13 @@
 /**
  * Premium Intro Sequence Component
- * Inspired by Domaine.com - 4.2 second choreographed animation
+ * Quick 3-second punchy animation
  * 
  * Timeline:
- * 0-900ms: Black screen + headline fade in/raise
- * 900-2400ms: Mosaic tiles reveal L→R with stagger
- * 2400-3300ms: Partial clear (top/bottom exit) + secondary copy
- * 3300-4200ms: Page reveal (overlay slides up)
+ * 0-1200ms: Fast mosaic tiles reveal
+ * 1200-1800ms: Quick left slide to black
+ * 1800-1900ms: Brief pause
+ * 1900-2500ms: "25 Million Views. And Counting."
+ * 2500-3000ms: Final reveal
  */
 
 import { useEffect, useState, useRef, useCallback } from 'react'
@@ -22,27 +23,36 @@ import JheneThmb from '../../assets/JheneThmb.webp'
 import Ozonethmb1 from '../../assets/Ozonethmb1.webp'
 import ososthmb from '../../assets/ososthmb.webp'
 import cfathmb from '../../assets/cfathmb.webp'
+import Rectangle75 from '../../assets/Rectangle+75.webp'
+import Artboard1 from '../../assets/Artboard+1.webp'
 import ravieIcon from '../../assets/ravie-icon.png'
 import ravieLogo from '../../assets/Ravielogo1.png'
 
-// Timeline constants (in ms) - Slower timing, no headline
+// Timeline constants (in ms) - Quick 3 second intro
 const TIMELINE = {
-  total: 8500,
-  preroll: { start: 0, end: 3600 },        // 3.6s for word cycle (500ms delay + 4*750ms + 100ms)
-  mosaic: { start: 3600, end: 5600 },      // 2s for mosaic reveal
-  leftSlide: { start: 5600, end: 6300 },   // 0.7s for left half to slide black
-  pause: { start: 6300, end: 6600 },       // 0.3s pause
-  secondary: { start: 6600, end: 7700 },   // 1.1s for secondary text
-  reveal: { start: 7700, end: 8500 }       // 0.8s for final slide up
+  total: 3000,                              // 3s total - fast and punchy
+  preroll: { start: 0, end: 0 },           // Skip word cycle
+  mosaic: { start: 0, end: 1200 },         // 1.2s for quick mosaic reveal
+  leftSlide: { start: 1200, end: 1800 },   // 0.6s for quick slide
+  pause: { start: 1800, end: 1900 },       // 0.1s brief pause
+  secondary: { start: 1900, end: 2500 },   // 0.6s for text (no time for delayed "And Counting")
+  reveal: { start: 2500, end: 3000 }       // 0.5s for final reveal
 }
 
-const STAGGER_DELAY = 120 // ms between each tile (slower stagger)
+const STAGGER_DELAY = 70 // ms between each tile (much faster for 3s total)
 
-// Word cycle configuration
+// Word cycle configuration - optimized for readability
 const WORD_CYCLE_CONFIG = {
-  prefixes: ["create", "build", "launch", "move"],
-  perWordMs: 750,  // Slower per word
-  startDelayMs: 500
+  prefixes: ["create", "build", "launch", "move", "inspire"],
+  colors: [
+    "linear-gradient(135deg, #FF006E 0%, #FF4D8F 100%)",  // Pink-red for "create"
+    "linear-gradient(135deg, #00D4FF 0%, #0099CC 100%)",  // Cyan-blue for "build"
+    "linear-gradient(135deg, #FFD600 0%, #FF9900 100%)",  // Yellow-orange for "launch"
+    "linear-gradient(135deg, #7C3AED 0%, #A855F7 100%)",  // Purple for "move"
+    "linear-gradient(135deg, #10B981 0%, #34D399 100%)"   // Green for "inspire"
+  ],
+  perWordMs: 1000,     // 1 second per word for comfortable reading
+  startDelayMs: 800    // 0.8s initial pause to set the mood
 }
 
 // Inline WordCycle component for pre-roll
@@ -63,8 +73,93 @@ function WordCycle({ prefixes, perWordMs, startDelayMs, isVisible, currentTime }
   // Which word? (0-indexed)
   const wordIndex = Math.floor(timeInWords / perWordMs)
   
-  // If we've shown all words, fade out
+  // Special handling: keep "move" (last word) visible for extra 500ms
+  const isLastWord = wordIndex === prefixes.length - 1
+  const extraTimeForLast = 500 // Extra time for "move" to linger
+  
+  // If we've shown all words, check if we should still show "move"
   if (wordIndex >= prefixes.length) {
+    // Check if we're still within the extra time for "move"
+    const timePastLastWord = timeInWords - (prefixes.length * perWordMs)
+    if (timePastLastWord < extraTimeForLast) {
+      // Keep showing "inspire"
+      const currentPrefix = prefixes[prefixes.length - 1]
+      return (
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 40,
+            pointerEvents: 'none',
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+          aria-hidden="true"
+        >
+          <div style={{
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            maxWidth: '1200px'
+          }}>
+            <div style={{
+              position: 'absolute',
+              left: '50%',
+              top: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '2px',
+              height: 'clamp(5rem, 12vw, 8rem)',
+              background: 'linear-gradient(180deg, transparent 0%, var(--color-ravie-red) 50%, transparent 100%)',
+              opacity: 0.6
+            }} />
+            
+            <img 
+              src={ravieLogo} 
+              alt="Ravie.co" 
+              style={{
+                position: 'absolute',
+                left: '52%',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                height: 'clamp(3rem, 7vw, 5rem)',
+                width: 'auto',
+                opacity: 0.95,
+                marginLeft: '3rem'
+              }}
+            />
+            
+            <div style={{
+              position: 'absolute',
+              right: '52%',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              marginRight: '3rem',
+              textAlign: 'right'
+            }}>
+              <span style={{
+                fontFamily: 'var(--font-serif)',
+                fontSize: 'clamp(4rem, 10vw, 7rem)',
+                fontWeight: 600,
+                letterSpacing: '-0.03em',
+                background: 'linear-gradient(135deg, var(--color-ravie-red) 0%, var(--color-ravie-purple) 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                display: 'inline-block'
+              }}>
+                {currentPrefix}
+              </span>
+            </div>
+          </div>
+        </div>
+      )
+    }
     return null
   }
   
@@ -74,68 +169,102 @@ function WordCycle({ prefixes, perWordMs, startDelayMs, isVisible, currentTime }
   const isFadingOut = false // Simplified - just cut to next word
   
   return (
-    <motion.div
-      className="intro-word-cycle"
-      initial={{ opacity: 0 }}
-      animate={{ 
-        opacity: isFadingOut ? 0 : 1
-      }}
-      transition={{ duration: 0.3 }}
+    <div
       style={{
         position: 'absolute',
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
         zIndex: 40,
-        pointerEvents: 'none'
+        pointerEvents: 'none',
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
       }}
       aria-hidden="true"
     >
+      {/* Static container for line and logo */}
       <div style={{
+        position: 'relative',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: '1rem'
+        width: '100%',
+        maxWidth: '1200px'
       }}>
-        <AnimatePresence mode="wait">
-          <motion.span
-            key={currentPrefix}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.4 }}
-            style={{
-              fontFamily: 'var(--font-serif)',
-              fontSize: 'clamp(2.5rem, 7vw, 5rem)',
-              fontWeight: 300,
-              letterSpacing: '-0.02em',
-              background: 'linear-gradient(135deg, var(--color-ravie-red) 0%, var(--color-ravie-purple) 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text'
-            }}
-          >
-            {currentPrefix}
-          </motion.span>
-        </AnimatePresence>
+        {/* Vertical separator line - absolutely positioned center */}
+        <div style={{
+          position: 'absolute',
+          left: '50%',
+          top: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '2px',
+          height: 'clamp(5rem, 12vw, 8rem)',
+          background: 'linear-gradient(180deg, transparent 0%, var(--color-ravie-red) 50%, transparent 100%)',
+          opacity: 0.6
+        }} />
+        
+        {/* Logo - absolutely positioned right */}
         <img 
           src={ravieLogo} 
           alt="Ravie.co" 
           style={{
-            height: 'clamp(2rem, 5vw, 3.5rem)',
+            position: 'absolute',
+            left: '52%',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            height: 'clamp(3rem, 7vw, 5rem)',
             width: 'auto',
-            opacity: 0.95
+            opacity: 0.95,
+            marginLeft: '3rem'
           }}
         />
+        
+        {/* Word container - absolutely positioned left */}
+        <div style={{
+          position: 'absolute',
+          right: '52%',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          marginRight: '3rem',
+          textAlign: 'right'
+        }}>
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={currentPrefix}
+              initial={{ opacity: 0, y: 20, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.9 }}
+              transition={{ 
+                duration: 0.6,
+                ease: [0.43, 0.13, 0.23, 0.96]
+              }}
+              style={{
+                fontFamily: 'var(--font-serif)',
+                fontSize: 'clamp(4rem, 10vw, 7rem)',
+                fontWeight: 600,
+                letterSpacing: '-0.03em',
+                background: 'linear-gradient(135deg, var(--color-ravie-red) 0%, var(--color-ravie-purple) 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                display: 'inline-block'
+              }}
+            >
+              {currentPrefix}
+            </motion.span>
+          </AnimatePresence>
+        </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
 export default function IntroSequence({ onComplete }) {
   const { shouldPlay, markAsCompleted, isReducedMotion } = useIntroState()
   const [currentTime, setCurrentTime] = useState(0)
-  const [isVisible, setIsVisible] = useState(true)
+  const [isVisible, setIsVisible] = useState(shouldPlay)
   const animationFrame = useRef()
   const startTime = useRef()
   const containerRef = useRef()
@@ -166,14 +295,14 @@ export default function IntroSequence({ onComplete }) {
     { id: 6, row: 1, col: 0, isBlack: true },          // B
     { id: 7, src: JheneThmb, row: 1, col: 1 },         // M
     { id: 8, row: 1, col: 2, isBlack: true },          // B
-    { id: 9, src: ravieIcon, row: 1, col: 3, isLogo: true }, // M (Logo)
+    { id: 9, src: Artboard1, row: 1, col: 3 },         // M (replaced logo with Artboard1)
     { id: 10, row: 1, col: 4, isBlack: true },         // B
     // Row 2
     { id: 11, src: ososthmb, row: 2, col: 0 },         // M
     { id: 12, row: 2, col: 1, isBlack: true },         // B
     { id: 13, src: cfathmb, row: 2, col: 2 },          // M
     { id: 14, row: 2, col: 3, isBlack: true },         // B
-    { id: 15, src: Ozonethmb1, row: 2, col: 4 }        // M
+    { id: 15, src: Rectangle75, row: 2, col: 4 }        // M (changed from Ozonethmb1)
   ]
 
   // Calculate tile index for L→R sweep (row-major order)
@@ -265,7 +394,7 @@ export default function IntroSequence({ onComplete }) {
           opacity: overlayExiting ? 0 : 1
         }}
         transition={{ 
-          duration: 1.2,
+          duration: 0.5,
           ease: [0.76, 0, 0.24, 1]
         }}
         exit={{ opacity: 0 }}
@@ -275,8 +404,8 @@ export default function IntroSequence({ onComplete }) {
       >
         {/* Skip button removed per user request */}
 
-        {/* Pre-roll: Word cycle */}
-        {!isReducedMotion && (
+        {/* Pre-roll: Word cycle - TEMPORARILY DISABLED */}
+        {/* {!isReducedMotion && (
           <WordCycle
             prefixes={WORD_CYCLE_CONFIG.prefixes}
             perWordMs={WORD_CYCLE_CONFIG.perWordMs}
@@ -284,10 +413,10 @@ export default function IntroSequence({ onComplete }) {
             isVisible={prerollVisible}
             currentTime={currentTime - TIMELINE.preroll.start}
           />
-        )}
+        )} */}
 
-        {/* Phase 1: Headline - shows after pre-roll */}
-        {headlineVisible && (
+        {/* Phase 1: Headline - TEMPORARILY DISABLED */}
+        {/* {headlineVisible && (
           <motion.div
             className="intro-headline-container"
             initial={{ opacity: 0, y: 16 }}
@@ -305,7 +434,7 @@ export default function IntroSequence({ onComplete }) {
               We create <span className="intro-headline-em">cult</span> followings
             </h1>
           </motion.div>
-        )}
+        )} */}
 
         {/* Phase 2-3: Mosaic Grid */}
         {mosaicVisible && (
@@ -334,10 +463,10 @@ export default function IntroSequence({ onComplete }) {
                       : 'inset(0% 100% 0% 0%)'
                   }}
                   transition={{
-                    opacity: { duration: 0.5 },
-                    scale: { duration: 0.6 },
+                    opacity: { duration: 0.3 },
+                    scale: { duration: 0.4 },
                     clipPath: { 
-                      duration: 0.8, 
+                      duration: 0.5, 
                       ease: [0.25, 0.46, 0.45, 0.94] 
                     }
                   }}
@@ -364,8 +493,8 @@ export default function IntroSequence({ onComplete }) {
                 x: leftHalfSliding ? 0 : '100%'
               }}
               transition={{ 
-                duration: 0.8,
-                ease: [0.76, 0, 0.24, 1]
+                duration: 0.5,  // Quick slide for 3s total
+                ease: [0.43, 0.13, 0.23, 0.96]  // Faster start, slower end
               }}
               style={{
                 position: 'absolute',
@@ -381,7 +510,7 @@ export default function IntroSequence({ onComplete }) {
           </>
         )}
 
-        {/* Phase 3: Secondary copy - Bold statement */}
+        {/* Phase 3: Secondary copy - 25 Million Views */}
         <motion.div
           className="intro-secondary-bold"
           initial={{ opacity: 0 }}
@@ -389,7 +518,7 @@ export default function IntroSequence({ onComplete }) {
             opacity: secondaryVisible ? 1 : 0
           }}
           transition={{ 
-            duration: 0.8,
+            duration: 0.4,
             ease: [0.25, 0.46, 0.45, 0.94]
           }}
           style={{
@@ -405,14 +534,41 @@ export default function IntroSequence({ onComplete }) {
             fontFamily: 'var(--font-sans)',
             fontSize: 'clamp(2rem, 4vw, 3.5rem)',
             fontWeight: 600,
-            lineHeight: 1.1,
+            lineHeight: 1.3,
             letterSpacing: '-0.02em',
             color: '#fff',
             textAlign: 'left',
             margin: 0
           }}>
-            We create<br/>
-            <span style={{ color: 'var(--color-ravie-red)' }}>cult</span> followings
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 0.3,
+                delay: 0,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+              style={{ display: 'block' }}
+            >
+              <span style={{ color: 'var(--color-ravie-red)' }}>25 Million</span> Views.
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: secondaryVisible ? 1 : 0, y: secondaryVisible ? 0 : 15 }}
+              transition={{ 
+                duration: 0.3,
+                delay: 0.2, // Minimal delay for 3s total
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+              style={{ 
+                display: 'block',
+                fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
+                marginTop: '0.5rem',
+                opacity: 0.9
+              }}
+            >
+              And Counting.
+            </motion.span>
           </h2>
         </motion.div>
 

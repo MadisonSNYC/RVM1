@@ -19,19 +19,16 @@ export function useIntroState() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     setIsReducedMotion(prefersReducedMotion)
 
-    // TEMPORARY: Always play intro for testing
-    setShouldPlay(true)
+    // Check localStorage to determine if intro should play
+    const lastShown = localStorage.getItem(STORAGE_KEY)
+    const now = Date.now()
     
-    // TODO: Re-enable localStorage check after testing
-    // const lastShown = localStorage.getItem(STORAGE_KEY)
-    // const now = Date.now()
-    // 
-    // if (!lastShown) {
-    //   setShouldPlay(true)
-    // } else {
-    //   const timeSinceLastShown = now - parseInt(lastShown, 10)
-    //   setShouldPlay(timeSinceLastShown > COOLDOWN_MS)
-    // }
+    if (!lastShown) {
+      setShouldPlay(true)
+    } else {
+      const timeSinceLastShown = now - parseInt(lastShown, 10)
+      setShouldPlay(timeSinceLastShown > COOLDOWN_MS)
+    }
   }, [])
 
   const markAsCompleted = () => {

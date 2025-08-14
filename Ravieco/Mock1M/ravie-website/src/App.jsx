@@ -1,6 +1,6 @@
 import './App.css'
 import { lazy, Suspense, useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import ErrorBoundary from './components/ErrorBoundary'
@@ -8,6 +8,7 @@ import { IntroSequence } from './components/intro'
 
 // Lazy load pages for code splitting
 const HomePage = lazy(() => import('./pages/HomePage'))
+const HomePage2 = lazy(() => import('./pages/HomePage2'))
 const WorkPage = lazy(() => import('./pages/WorkPage'))
 const AboutPage = lazy(() => import('./pages/AboutPage'))
 const ContactPage = lazy(() => import('./pages/ContactPage'))
@@ -26,22 +27,29 @@ const PageLoader = () => (
 
 function App() {
   const [introComplete, setIntroComplete] = useState(false)
+  const location = useLocation()
+  
+  // Don't show Header and ProjectDirectory on HomePage2
+  const isHomePage2 = location.pathname === '/v2'
 
   return (
     <ErrorBoundary fallbackMessage="The application encountered an error. Please refresh the page to continue.">
-      {/* Intro Sequence Overlay */}
-      <IntroSequence onComplete={() => setIntroComplete(true)} />
+      {/* Intro Sequence Overlay - Commented out for debugging */}
+      {/* <IntroSequence onComplete={() => setIntroComplete(true)} /> */}
       
       {/* Main App Content */}
       <div className="min-h-screen bg-black" id="main-content" tabIndex={-1}>
-        <Header />
-        <Suspense fallback={<div className="w-12 h-12" />}>
-          <ProjectDirectory />
-        </Suspense>
+        {!isHomePage2 && <Header />}
+        {!isHomePage2 && (
+          <Suspense fallback={<div className="w-12 h-12" />}>
+            <ProjectDirectory />
+          </Suspense>
+        )}
         <main>
           <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/" element={<HomePage />} />
+              <Route path="/v2" element={<HomePage2 />} />
               <Route path="/work" element={<WorkPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/contact" element={<ContactPage />} />
@@ -49,7 +57,7 @@ function App() {
             </Routes>
           </Suspense>
         </main>
-        <Footer />
+        {!isHomePage2 && <Footer />}
       </div>
     </ErrorBoundary>
   )

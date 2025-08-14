@@ -31,6 +31,15 @@ export default function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-12" role="navigation" aria-label="Main navigation">
             <Link 
+              to="/v2" 
+              className={`text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-[#00D4FF] focus:ring-offset-2 focus:ring-offset-black rounded-sm px-2 py-1 ${
+                isActive('/v2') ? 'text-[#00D4FF]' : 'text-white/90 hover:text-white'
+              }`}
+              aria-current={isActive('/v2') ? 'page' : undefined}
+            >
+              HM2
+            </Link>
+            <Link 
               to="/work" 
               className={`text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-[#00D4FF] focus:ring-offset-2 focus:ring-offset-black rounded-sm px-2 py-1 ${
                 isActive('/work') ? 'text-[#00D4FF]' : 'text-white/90 hover:text-white'
@@ -75,6 +84,15 @@ export default function Header() {
         {isMenuOpen && (
           <nav id="mobile-navigation" className="md:hidden mt-6 pb-6" role="navigation" aria-label="Mobile navigation">
             <div className="flex flex-col space-y-4">
+              <Link 
+                to="/v2" 
+                className={`text-sm transition-colors ${
+                  isActive('/v2') ? 'text-[#00D4FF]' : 'text-white/90 hover:text-white'
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                HM2
+              </Link>
               <Link 
                 to="/work" 
                 className={`text-sm transition-colors ${

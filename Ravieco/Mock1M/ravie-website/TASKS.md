@@ -1,11 +1,17 @@
 # 📋 Ravie Website - Codebase Improvement Tasks
 
 ## Overview
-This document tracks all tasks for improving the Ravie website codebase architecture, based on the comprehensive audit performed on 2025-08-11.
+This document tracks all tasks for improving the Ravie website codebase architecture, based on the comprehensive audit performed on 2025-08-11 and updated with code quality audit on 2025-08-13.
 
 **Project Status:** 🟡 Needs Refactoring  
-**Architecture Grade:** B-  
-**Estimated Total Effort:** ~16-24 hours
+**Architecture Grade:** C+ (due to code quality issues)  
+**Estimated Total Effort:** ~40-50 hours
+
+### ⚠️ CRITICAL FINDINGS:
+- **13 files over 200 lines** need refactoring
+- **39/47 UI components unused** (83%)
+- **10,589 total lines** of code with ~15% duplication
+- **TODOs in production code**
 
 ---
 
@@ -46,10 +52,47 @@ This document tracks all tasks for improving the Ravie website codebase architec
 
 ---
 
-## 🟡 Phase 2: Architecture Improvements (Priority: MEDIUM)
+## 🔴 Phase 2: Code Quality Critical Issues (Priority: URGENT)
+*Must fix these issues found in audit - they impact production readiness*
+
+### Priority Order:
+1. **🔴 CRITICAL:** Remove 39 unused UI components - Quick win
+2. **🔴 CRITICAL:** Fix TODOs and console.logs - Production ready
+3. **🔴 CRITICAL:** Split HomePage2.css (806 lines!) - Unmaintainable
+4. **🟡 HIGH:** Refactor IntroSequence.jsx (592 lines)
+5. **🟡 HIGH:** Extract duplicate filter logic
+
+### 2.1 Unused UI Components (Remove Immediately)
+- [ ] Remove 39 unused components from `/src/components/ui/`
+- [ ] Keep only: button, form, input, dialog, toast, select, card, separator
+- [ ] Document why any other components are kept
+**Effort:** 2 hours  
+**Impact:** Reduces confusion, cleaner codebase
+
+### 2.2 Files Over 200 Lines (Urgent Refactoring)
+- [ ] **HomePage2.css** (806 lines) → Split into: header.css, sidebar.css, hero.css, projects.css
+- [ ] **IntroSequence.jsx** (592 lines) → Break into: animations.js, phases.js, IntroUI.jsx
+- [ ] **ProjectsBentoGrid.jsx** (359 lines) → Extract BentoCard, BentoGrid components
+- [ ] **App.css** (342 lines) → Split into component styles
+- [ ] **ContactPage.jsx** (285 lines) → Extract ContactForm, ContactInfo
+- [ ] **HeroSection.jsx** (254 lines) → Split HeroAnimation, HeroContent
+- [ ] **AboutPage.jsx** (250 lines) → Extract sections
+**Effort:** 10 hours
+
+### 2.3 Production Code Issues (Fix Now)
+- [ ] Remove TODO: WorkPage.jsx:118 - Implement project detail modal
+- [ ] Remove TODO: useIntroState.js:25 - Re-enable localStorage
+- [ ] Replace console.error in ErrorBoundary.jsx:18 with proper logger
+- [ ] Extract magic numbers to constants file
+- [ ] Create `useProjectFilters` hook for duplicate logic
+**Effort:** 3 hours
+
+---
+
+## 🟡 Phase 3: Architecture Improvements (Priority: MEDIUM)
 *Structural improvements for better scalability*
 
-### 2.1 Implement Proper Routing ✅
+### 3.1 Implement Proper Routing ✅
 - [x] Set up React Router in `main.jsx`
 - [x] Create page components:
   - [x] `/src/pages/HomePage.jsx`
@@ -62,7 +105,7 @@ This document tracks all tasks for improving the Ravie website codebase architec
 **Effort:** 3 hours  
 **Dependencies:** react-router-dom (already installed)
 
-### 2.2 Component Decomposition ✅
+### 3.2 Component Decomposition ✅
 - [x] Extract from `ProjectsSection.jsx`:
   - [x] `ProjectCard.jsx` component
   - [x] `ProjectGrid.jsx` wrapper
@@ -75,7 +118,7 @@ This document tracks all tasks for improving the Ravie website codebase architec
 **Effort:** 4 hours  
 **Files:** `ProjectsSection.jsx` (364 lines), `HeroSection.jsx` (177 lines)
 
-### 2.3 Standardize Styling System ✅
+### 3.3 Standardize Styling System ✅
 - [x] Create `/src/styles/variables.css` for:
   - [x] Color tokens (use existing --neon-blue, --vivid-purple)
   - [x] Spacing scale
@@ -88,10 +131,10 @@ This document tracks all tasks for improving the Ravie website codebase architec
 
 ---
 
-## 🟢 Phase 3: Performance & Polish (Priority: LOW)
+## 🟢 Phase 4: Performance & Polish (Priority: LOW)
 *Optimizations and enhancements*
 
-### 3.1 Bundle Optimization ✅
+### 4.1 Bundle Optimization ✅
 - [x] Audit and remove unused dependencies:
   - [x] Removed 40+ unused Radix UI packages
   - [x] Removed unused form libraries (react-hook-form, zod)
@@ -104,7 +147,7 @@ This document tracks all tasks for improving the Ravie website codebase architec
 **Effort:** 2 hours  
 **Expected Impact:** 30-40% bundle size reduction
 
-### 3.2 Image Optimization ✅
+### 4.2 Image Optimization ✅
 - [x] Implement lazy loading for project thumbnails
 - [x] Add loading skeletons
 - [x] Convert images to next-gen formats (WebP done ✅)
@@ -113,7 +156,7 @@ This document tracks all tasks for improving the Ravie website codebase architec
 **Effort:** 2 hours  
 **Files:** All components using thumbnailMap
 
-### 3.3 Accessibility Improvements ✅
+### 4.3 Accessibility Improvements ✅
 - [x] Add ARIA labels to:
   - [x] Interactive buttons
   - [x] Navigation elements  
@@ -130,31 +173,31 @@ This document tracks all tasks for improving the Ravie website codebase architec
 
 ---
 
-## 📈 Phase 4: Future Enhancements (Priority: OPTIONAL)
+## 📈 Phase 5: Future Enhancements (Priority: OPTIONAL)
 *Nice-to-have improvements for long-term maintainability*
 
-### 4.1 TypeScript Migration
+### 5.1 TypeScript Migration
 - [ ] Add TypeScript configuration
 - [ ] Convert utility files first
 - [ ] Add types for data structures
 - [ ] Gradually migrate components
 **Effort:** 8+ hours
 
-### 4.2 Testing Infrastructure
+### 5.2 Testing Infrastructure
 - [ ] Set up Vitest
 - [ ] Add unit tests for utilities
 - [ ] Add component tests
 - [ ] Add E2E tests with Playwright
 **Effort:** 6+ hours
 
-### 4.3 Development Tooling
+### 5.3 Development Tooling
 - [ ] Configure ESLint rules
 - [ ] Add Prettier configuration
 - [ ] Set up Husky pre-commit hooks
 - [ ] Add GitHub Actions CI/CD
 **Effort:** 2 hours
 
-### 4.4 State Management
+### 5.4 State Management
 - [ ] Evaluate need for global state
 - [ ] Consider Context API or Zustand
 - [ ] Implement if needed for:
@@ -181,20 +224,22 @@ This document tracks all tasks for improving the Ravie website codebase architec
 
 ### Completion Tracking
 - Phase 1: 3/3 tasks (100%) ✅
-- Phase 2: 3/3 tasks (100%) ✅
+- Phase 2: 0/15 tasks (0%) 🔴 URGENT
 - Phase 3: 3/3 tasks (100%) ✅
-- Phase 4: 0/4 tasks (0%)
+- Phase 4: 3/3 tasks (100%) ✅
+- Phase 5: 0/4 tasks (0%)
+- Quick Wins: 5/5 tasks (100%) ✅
 
-**Total Progress:** 9/13 major tasks (69%)
+**Total Progress:** 14/33 total tasks (42%)
 
 ---
 
 ## 🚀 Quick Wins (Can do in <30 mins each)
-1. [ ] Remove unused imports from package.json
-2. [ ] Fix deprecation warning in `use-mobile.js:15`
-3. [ ] Add `.nvmrc` file for Node version
-4. [ ] Update meta tags in `index.html`
-5. [ ] Add favicon variants
+1. [x] Remove unused imports from package.json ✅
+2. [x] Fix deprecation warning in `use-mobile.js:15` ✅
+3. [x] Add `.nvmrc` file for Node version ✅
+4. [x] Update meta tags in `index.html` ✅
+5. [x] Add favicon variants ✅
 
 ---
 
@@ -239,5 +284,6 @@ This document tracks all tasks for improving the Ravie website codebase architec
 
 ---
 
-*Last Updated: 2025-08-11*  
-*Next Review: After site feature completion*
+*Last Updated: 2025-08-13*  
+*Audit Added: Comprehensive code quality audit findings*  
+*Next Review: After Phase 5 completion*

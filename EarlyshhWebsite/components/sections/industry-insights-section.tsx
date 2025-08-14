@@ -12,6 +12,8 @@ export default function IndustryInsightsSection() {
             alt="Industry Trends Visualization"
             width={700}
             height={350}
+            loading="lazy"
+            sizes="(max-width: 768px) 100vw, 700px"
             className="rounded-lg shadow-xl object-cover"
           />
         </div>

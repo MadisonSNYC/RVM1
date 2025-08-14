@@ -1,5 +1,7 @@
 import React from 'react'
 import { AlertCircle, RefreshCw, Home } from 'lucide-react'
+import logger from '../services/logger'
+import { sanitizeForDisplay } from '../utils/security'
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -13,10 +15,18 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    // Log error to console in development
-    if (process.env.NODE_ENV === 'development') {
-      console.error('ErrorBoundary caught an error:', error, errorInfo)
-    }
+    // Sanitize error message before logging to prevent XSS
+    const sanitizedError = error?.toString ? sanitizeForDisplay(error.toString()) : 'Unknown error'
+    const sanitizedStack = error?.stack ? sanitizeForDisplay(error.stack) : 'No stack trace'
+    
+    // Log error using logger service with sanitized data
+    logger.error('ErrorBoundary caught an error', {
+      error: sanitizedError,
+      errorInfo: errorInfo?.componentStack ? sanitizeForDisplay(errorInfo.componentStack) : 'No component stack',
+      stack: sanitizedStack,
+      url: window.location.href,
+      userAgent: navigator.userAgent
+    })
     
     // Update state with error details
     this.setState({
@@ -62,8 +72,8 @@ class ErrorBoundary extends React.Component {
                     Show error details
                   </summary>
                   <pre className="mt-4 p-4 bg-black/50 rounded-xl text-xs text-red-400 overflow-x-auto">
-                    {this.state.error.toString()}
-                    {this.state.errorInfo && this.state.errorInfo.componentStack}
+                    {sanitizeForDisplay(this.state.error?.toString() || 'Unknown error')}
+                    {this.state.errorInfo && sanitizeForDisplay(this.state.errorInfo.componentStack)}
                   </pre>
                 </details>
               )}
