@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { ExternalLink, Play } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { thumbnailMap } from '../data/thumbnails'
 import ImageWithFallback from './ImageWithFallback'
 
@@ -12,27 +13,24 @@ import ImageWithFallback from './ImageWithFallback'
  * @param {Function} props.onClick - Click handler
  */
 export default function ProjectCard({ project, index = 0, className = '', onClick }) {
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault()
-      onClick && onClick()
-    }
-  }
+  const projectUrl = `/work/${project.id}`
 
   return (
     <motion.article
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.05 }}
-      className={`group relative overflow-hidden rounded-2xl cursor-pointer glass-dark backdrop-blur-sm ${className}`}
-      onClick={onClick}
-      onKeyDown={handleKeyDown}
-      tabIndex={0}
-      role="button"
-      aria-label={`View ${project.title} project details`}
+      className={className}
     >
-      {/* Project Image */}
-      <div className="aspect-video relative overflow-hidden bg-gray-900">
+      <Link 
+        to={projectUrl}
+        className="group relative overflow-hidden rounded-2xl cursor-pointer glass-dark backdrop-blur-sm block"
+        onClick={onClick}
+        aria-label={`View ${project.title} project details`}
+        data-project-card="true"
+      >
+        {/* Project Image */}
+        <div className="aspect-video relative overflow-hidden bg-gray-900">
         <ImageWithFallback
           src={thumbnailMap[project.thumbnail]}
           alt={project.title}
@@ -84,6 +82,7 @@ export default function ProjectCard({ project, index = 0, className = '', onClic
           <ExternalLink className="w-4 h-4 text-white/40 group-hover:text-white transition-colors" />
         </div>
       </div>
+      </Link>
     </motion.article>
   )
 }

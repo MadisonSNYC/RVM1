@@ -79,21 +79,21 @@ export default function HeroSection() {
 
       {/* Main Content */}
       <div className="relative z-10 w-full">
-        <div className="max-w-7xl mx-auto px-8 py-32">
+        <div className="w-full px-10 md:px-20 lg:px-44 py-24">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.15, ease: "easeOut" }}
             className="text-center"
           >
             {/* Main Headline */}
-            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light text-white mb-8 leading-[1.1] tracking-tight">
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-white mb-8 leading-[1.1] tracking-tight">
               We create{' '}
               <motion.span 
                 className="italic font-normal"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
+                transition={{ delay: 0.05, duration: 0.15 }}
               >
                 cult
               </motion.span>
@@ -103,10 +103,10 @@ export default function HeroSection() {
 
             {/* Subtext */}
             <motion.p
-              className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-16"
+              className="text-base md:text-lg text-white/60 max-w-2xl mx-auto mb-16"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
+              transition={{ delay: 0.05, duration: 0.15 }}
             >
               A creative agency focused on scaling brands
               <br />
@@ -119,14 +119,14 @@ export default function HeroSection() {
             className="mt-16 max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.8 }}
+            transition={{ delay: 0.1, duration: 0.15 }}
           >
             {/* Selected Work Label */}
             <motion.p 
               className="text-white/50 text-sm font-light mb-4 tracking-wider uppercase"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
+              transition={{ delay: 0.1, duration: 0.15 }}
             >
               Selected Work
             </motion.p>
@@ -138,14 +138,14 @@ export default function HeroSection() {
                 <img 
                   src={thumbnailMap['coinbase-rebrand']} 
                   alt="Coinbase"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-150 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                 <div className="absolute bottom-3 left-3">
                   <h3 className="text-white text-lg font-light">COINBASE</h3>
                   <p className="text-white/50 text-[10px] uppercase tracking-wider">Brand Identity</p>
                 </div>
-                <div className="absolute inset-0 bg-white/[0.03] backdrop-blur-[0.5px] opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                <div className="absolute inset-0 bg-white/[0.03] backdrop-blur-[0.5px] opacity-0 group-hover:opacity-100 transition-all duration-150" />
               </div>
 
               {/* Medium - Loops (2x1) */}
@@ -153,13 +153,13 @@ export default function HeroSection() {
                 <img 
                   src={thumbnailMap['loops-campaign']} 
                   alt="Loops"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-150 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-br from-red-900/60 to-orange-800/60" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <h3 className="text-white text-sm font-light tracking-wide">LOOPS</h3>
                 </div>
-                <div className="absolute inset-0 bg-white/[0.03] backdrop-blur-[0.5px] opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                <div className="absolute inset-0 bg-white/[0.03] backdrop-blur-[0.5px] opacity-0 group-hover:opacity-100 transition-all duration-150" />
               </div>
 
               {/* Small - Jhene (1x1) */}
@@ -167,13 +167,13 @@ export default function HeroSection() {
                 <img 
                   src={thumbnailMap['jhene-aiko']} 
                   alt="Jhene Aiko"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-150 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/40" />
                 <div className="absolute inset-0 flex items-center justify-center p-2">
                   <h3 className="text-white text-[10px] font-light text-center leading-tight">JHENE<br/>AIKO</h3>
                 </div>
-                <div className="absolute inset-0 bg-white/[0.03] backdrop-blur-[0.5px] opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                <div className="absolute inset-0 bg-white/[0.03] backdrop-blur-[0.5px] opacity-0 group-hover:opacity-100 transition-all duration-150" />
               </div>
 
               {/* Small - KW (1x1) */}
@@ -181,13 +181,13 @@ export default function HeroSection() {
                 <img 
                   src={thumbnailMap['keller-williams']} 
                   alt="Keller Williams"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-150 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-orange-400/30" />
                 <div className="absolute inset-0 flex items-center justify-center p-2">
                   <h3 className="text-white text-[10px] font-medium text-center leading-tight">KELLER<br/>WILLIAMS</h3>
                 </div>
-                <div className="absolute inset-0 bg-white/[0.03] backdrop-blur-[0.5px] opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                <div className="absolute inset-0 bg-white/[0.03] backdrop-blur-[0.5px] opacity-0 group-hover:opacity-100 transition-all duration-150" />
               </div>
 
               {/* Medium - OSO (2x1) */}
@@ -195,13 +195,13 @@ export default function HeroSection() {
                 <img 
                   src={thumbnailMap['oso-nyc']} 
                   alt="OSO NYC"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-150 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gray-900/50" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <h3 className="text-white text-sm font-light tracking-wide">OSO NYC</h3>
                 </div>
-                <div className="absolute inset-0 bg-white/[0.03] backdrop-blur-[0.5px] opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                <div className="absolute inset-0 bg-white/[0.03] backdrop-blur-[0.5px] opacity-0 group-hover:opacity-100 transition-all duration-150" />
               </div>
 
               {/* More Projects (2x2) */}
@@ -209,14 +209,14 @@ export default function HeroSection() {
                 <img 
                   src={thumbnailMap['spotify-campaign']} 
                   alt="Spotify"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-150 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-green-900/70 via-black/30 to-transparent" />
                 <div className="absolute bottom-3 left-3">
                   <h3 className="text-white text-base font-light">SPOTIFY</h3>
                   <p className="text-white/50 text-[10px] uppercase tracking-wider">Campaign</p>
                 </div>
-                <div className="absolute inset-0 bg-white/[0.03] backdrop-blur-[0.5px] opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                <div className="absolute inset-0 bg-white/[0.03] backdrop-blur-[0.5px] opacity-0 group-hover:opacity-100 transition-all duration-150" />
               </div>
 
               {/* Small tile (1x1) */}
@@ -227,7 +227,7 @@ export default function HeroSection() {
                     <p className="text-white/60 text-[9px] uppercase tracking-wider mt-1">More</p>
                   </div>
                 </div>
-                <div className="absolute inset-0 bg-white/[0.03] opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                <div className="absolute inset-0 bg-white/[0.03] opacity-0 group-hover:opacity-100 transition-all duration-150" />
               </div>
 
               {/* CTA Card (3x1) */}
@@ -244,7 +244,7 @@ export default function HeroSection() {
                     →
                   </motion.span>
                 </div>
-                <div className="absolute inset-0 bg-white/[0.02] opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                <div className="absolute inset-0 bg-white/[0.02] opacity-0 group-hover:opacity-100 transition-all duration-150" />
               </div>
             </div>
           </motion.div>

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
-import ravieIcon from '../assets/ravie-icon.png'
+import ravieLogo from '../assets/Ravielogo1.png'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -12,7 +12,7 @@ export default function Header() {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-transparent" role="banner">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black border-b border-white/10" role="banner">
       <div className="max-w-7xl mx-auto px-8 py-6">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -22,7 +22,7 @@ export default function Header() {
             aria-label="Ravie - Home"
           >
             <img 
-              src={ravieIcon} 
+              src={ravieLogo} 
               alt="Ravie" 
               className="h-8 w-auto"
             />
@@ -30,15 +30,6 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-12" role="navigation" aria-label="Main navigation">
-            <Link 
-              to="/v2" 
-              className={`text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-[#00D4FF] focus:ring-offset-2 focus:ring-offset-black rounded-sm px-2 py-1 ${
-                isActive('/v2') ? 'text-[#00D4FF]' : 'text-white/90 hover:text-white'
-              }`}
-              aria-current={isActive('/v2') ? 'page' : undefined}
-            >
-              HM2
-            </Link>
             <Link 
               to="/work" 
               className={`text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-[#00D4FF] focus:ring-offset-2 focus:ring-offset-black rounded-sm px-2 py-1 ${
@@ -48,15 +39,16 @@ export default function Header() {
             >
               Work
             </Link>
-            <Link 
-              to="/about" 
-              className={`text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-[#00D4FF] focus:ring-offset-2 focus:ring-offset-black rounded-sm px-2 py-1 ${
-                isActive('/about') ? 'text-[#00D4FF]' : 'text-white/90 hover:text-white'
-              }`}
-              aria-current={isActive('/about') ? 'page' : undefined}
+            <a 
+              href="#about-section" 
+              onClick={(e) => {
+                e.preventDefault()
+                document.getElementById('about-section')?.scrollIntoView({ behavior: 'smooth' })
+              }}
+              className="text-sm text-white/90 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#00D4FF] focus:ring-offset-2 focus:ring-offset-black rounded-sm px-2 py-1 cursor-pointer"
             >
               About
-            </Link>
+            </a>
             <Link 
               to="/contact" 
               className={`text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-[#00D4FF] focus:ring-offset-2 focus:ring-offset-black rounded-sm px-2 py-1 ${
@@ -64,7 +56,7 @@ export default function Header() {
               }`}
               aria-current={isActive('/contact') ? 'page' : undefined}
             >
-              Contact
+              Let's Talk
             </Link>
           </nav>
 
@@ -85,15 +77,6 @@ export default function Header() {
           <nav id="mobile-navigation" className="md:hidden mt-6 pb-6" role="navigation" aria-label="Mobile navigation">
             <div className="flex flex-col space-y-4">
               <Link 
-                to="/v2" 
-                className={`text-sm transition-colors ${
-                  isActive('/v2') ? 'text-[#00D4FF]' : 'text-white/90 hover:text-white'
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                HM2
-              </Link>
-              <Link 
                 to="/work" 
                 className={`text-sm transition-colors ${
                   isActive('/work') ? 'text-[#00D4FF]' : 'text-white/90 hover:text-white'
@@ -102,15 +85,17 @@ export default function Header() {
               >
                 Work
               </Link>
-              <Link 
-                to="/about" 
-                className={`text-sm transition-colors ${
-                  isActive('/about') ? 'text-[#00D4FF]' : 'text-white/90 hover:text-white'
-                }`}
-                onClick={() => setIsMenuOpen(false)}
+              <a 
+                href="#about-section" 
+                className="text-sm text-white/90 hover:text-white transition-colors cursor-pointer"
+                onClick={(e) => {
+                  e.preventDefault()
+                  setIsMenuOpen(false)
+                  document.getElementById('about-section')?.scrollIntoView({ behavior: 'smooth' })
+                }}
               >
                 About
-              </Link>
+              </a>
               <Link 
                 to="/contact" 
                 className={`text-sm transition-colors ${
@@ -118,7 +103,7 @@ export default function Header() {
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                Contact
+                Let's Talk
               </Link>
             </div>
           </nav>

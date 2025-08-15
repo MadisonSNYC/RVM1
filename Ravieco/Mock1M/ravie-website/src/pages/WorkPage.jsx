@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { getAllProjects } from '../data/projects'
 import ProjectGrid from '../components/ProjectGrid'
 import ErrorBoundary from '../components/ErrorBoundary'
+import EndOfContentCTA from '../components/EndOfContentCTA'
 import { checkURLSecurity } from '../utils/security'
 import logger from '../services/logger'
 import { useProjectFilters } from '../hooks/useProjectFilters'
@@ -149,13 +150,24 @@ export default function WorkPage() {
             <div className="text-center py-12">
               <button
                 onClick={() => {
-                  setSelectedCategory('All')
-                  setSelectedIndustry('All')
+                  handleCategoryChange('All')
+                  handleIndustryChange('All')
                 }}
                 className="px-6 py-3 bg-white/10 hover:bg-white/20 rounded-full text-white transition-all duration-300"
               >
                 Clear Filters
               </button>
+            </div>
+          )}
+          
+          {/* End of Content CTA - Only show when projects are visible */}
+          {filteredProjects.length > 0 && (
+            <div className="mt-20">
+              <EndOfContentCTA 
+                variant="minimal"
+                title="Didn't find what you're looking for?"
+                subtitle="We'd love to discuss your specific needs and create something unique for you."
+              />
             </div>
           )}
         </div>

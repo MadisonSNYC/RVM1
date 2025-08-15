@@ -68,34 +68,34 @@ export default function ProjectsBentoGrid() {
   ]
 
   return (
-    <section className="relative bg-[#0a0a0a] px-8 py-32 overflow-hidden">
-      <div className="max-w-[1400px] mx-auto">
+    <section className="relative bg-[#0a0a0a] py-24 overflow-hidden">
+      <div className="w-full px-10 md:px-20 lg:px-44">
         
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.15 }}
           viewport={{ once: true }}
           className="mb-20"
         >
-          <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
+          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
             Selected Work
           </h2>
-          <p className="text-white/60 text-xl max-w-3xl">
+          <p className="text-white/60 text-base md:text-lg max-w-3xl">
             Premium motion design for the world's most innovative brands
           </p>
         </motion.div>
 
         {/* Cohesive Bento Grid - Desktop */}
-        <div className="hidden lg:grid grid-cols-5 grid-rows-4 gap-4 h-[800px]">
+        <div className="hidden lg:grid grid-cols-5 grid-rows-4 gap-3 h-[600px]">
           
           {/* Row 1-2: Coinbase (2x2) + Loops (2x1) + KW (1x2) */}
           <motion.div
             className="col-span-2 row-span-2 relative group cursor-pointer overflow-hidden rounded-2xl"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.15 }}
             viewport={{ once: true }}
             whileHover={{ scale: 1.02 }}
             onHoverStart={() => setHoveredCard('coinbase')}
@@ -113,7 +113,7 @@ export default function ProjectsBentoGrid() {
             className="col-span-2 row-span-1 relative group cursor-pointer overflow-hidden rounded-2xl"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.15, delay: 0.1 }}
             viewport={{ once: true }}
             whileHover={{ scale: 1.02 }}
             onHoverStart={() => setHoveredCard('loops')}
@@ -131,7 +131,7 @@ export default function ProjectsBentoGrid() {
             className="col-span-1 row-span-2 relative group cursor-pointer overflow-hidden rounded-2xl"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
+            transition={{ duration: 0.15, delay: 0.15 }}
             viewport={{ once: true }}
             whileHover={{ scale: 1.02 }}
             onHoverStart={() => setHoveredCard('kw')}
@@ -150,7 +150,7 @@ export default function ProjectsBentoGrid() {
             className="col-span-1 row-span-1 relative group cursor-pointer overflow-hidden rounded-2xl"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.15, delay: 0.2 }}
             viewport={{ once: true }}
             whileHover={{ scale: 1.02 }}
             onHoverStart={() => setHoveredCard('jhene')}
@@ -167,7 +167,7 @@ export default function ProjectsBentoGrid() {
             className="col-span-1 row-span-1 relative group cursor-pointer overflow-hidden rounded-2xl"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.25 }}
+            transition={{ duration: 0.15, delay: 0.25 }}
             viewport={{ once: true }}
             whileHover={{ scale: 1.02 }}
             onHoverStart={() => setHoveredCard('ozone')}
@@ -185,7 +185,7 @@ export default function ProjectsBentoGrid() {
             className="col-span-2 row-span-1 relative group cursor-pointer overflow-hidden rounded-2xl"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.15, delay: 0.3 }}
             viewport={{ once: true }}
             whileHover={{ scale: 1.02 }}
             onHoverStart={() => setHoveredCard('osos')}
@@ -203,7 +203,7 @@ export default function ProjectsBentoGrid() {
             className="col-span-1 row-span-1 relative group cursor-pointer overflow-hidden rounded-2xl"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.35 }}
+            transition={{ duration: 0.15, delay: 0.35 }}
             viewport={{ once: true }}
             whileHover={{ scale: 1.02 }}
             onHoverStart={() => setHoveredCard('amex')}
@@ -220,7 +220,7 @@ export default function ProjectsBentoGrid() {
             className="col-span-1 row-span-1 relative group cursor-pointer overflow-hidden rounded-2xl"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.15, delay: 0.4 }}
             viewport={{ once: true }}
             whileHover={{ scale: 1.02 }}
             onHoverStart={() => setHoveredCard('soho')}
@@ -238,7 +238,7 @@ export default function ProjectsBentoGrid() {
             className="col-span-2 row-span-1 relative group cursor-pointer overflow-hidden rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.45 }}
+            transition={{ duration: 0.15, delay: 0.45 }}
             viewport={{ once: true }}
             whileHover={{ scale: 1.02 }}
           >
@@ -264,7 +264,7 @@ export default function ProjectsBentoGrid() {
               } aspect-square md:aspect-auto`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{ duration: 0.15, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
               <BentoCard 
@@ -307,7 +307,7 @@ function BentoCard({ project, gradient, isHovered, size = 'normal' }) {
         className="absolute inset-0 bg-black/40 backdrop-blur-sm"
         initial={{ opacity: 0 }}
         animate={{ opacity: isHovered ? 1 : 0 }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.15 }}
       />
 
       {/* Content */}
@@ -318,7 +318,7 @@ function BentoCard({ project, gradient, isHovered, size = 'normal' }) {
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
             initial={{ scale: 0 }}
             animate={{ scale: isHovered ? 1 : 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.15 }}
           >
             <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center">
               <Play className="w-8 h-8 text-white fill-white ml-1" />
@@ -336,7 +336,7 @@ function BentoCard({ project, gradient, isHovered, size = 'normal' }) {
         {/* Title and Metrics */}
         <motion.div
           animate={{ y: isHovered ? -5 : 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.15 }}
         >
           <h3 className={`text-white font-bold mb-1 ${
             size === 'large' ? 'text-3xl' : size === 'wide' ? 'text-2xl' : 'text-xl'
